@@ -8,7 +8,7 @@ blockstream = open(blockfile, 'rb')
 def reverse_bytes(bytes):
     reversed = ""
     for i in range(0, len(bytes), 2):
-        reversed += bytes[::-1][i:i+2][::-1]
+        reversed = bytes[i:i+2] + reversed
     return reversed
 
 
