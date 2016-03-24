@@ -1,18 +1,10 @@
 import datetime
+from tx import tx
 from blockutil import *
 
 
 class block(object):
 
-    magic_number = ''
-    block_size = ''
-    version = ''
-    prev_hash = ''
-    merkel_root = ''
-    time = ''
-    target = ''
-    nonce = ''
-    txcount = ''
 
     def __init__(self, blockstream):
         self.magic_number = parse_int(blockstream, 4)
@@ -23,7 +15,9 @@ class block(object):
         self.time = parse_int(blockstream, 4)
         self.target = parse_int(blockstream, 4)
         self.nonce = parse_int(blockstream, 4)
-        self.txcount = ord(blockstream.read(1))
+        self.txcount = compact_size(blockstream)
+        self.txs = []
+
 
     def __str__(self):
         return (
@@ -38,5 +32,5 @@ class block(object):
                 ).strftime('%Y-%m-%d %H:%M:%S')) +
             '\nTarget:\t' + hex(self.target) +
             '\nNonce:\t' + str(self.nonce) +
-            '\nTransactions:\t' + str(self.txcount)
+            '\nTransaction Count:\t' + str(self.txcount)
         )
