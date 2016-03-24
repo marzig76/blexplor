@@ -1,32 +1,27 @@
-import struct
-import datetime
-
-blockfile = '/home/marzig76/.bitcoin/blocks/blk00000.dat'
-
-blockstream = open(blockfile, 'rb')
-
-def reverse_bytes(bytes):
-    reversed = ""
-    for i in range(0, len(bytes), 2):
-        reversed = bytes[i:i+2] + reversed
-    return reversed
 
 
-print 'Magic Number: ', hex(struct.unpack('I', blockstream.read(4))[0])
-print 'Block size: ', struct.unpack('I', blockstream.read(4))[0]
+class block(object):
 
-print 'Version: ', struct.unpack('I', blockstream.read(4))[0]
-print 'Prev Hash: ', reverse_bytes(blockstream.read(32).encode("hex"))
-print 'Merkel Root: ', reverse_bytes(blockstream.read(32).encode("hex"))
-print 'time: ', (
-    datetime.datetime.fromtimestamp(
-        struct.unpack('I', blockstream.read(4))[0]
-        ).strftime('%Y-%m-%d %H:%M:%S'))
+    magic_number = ''
+    block_size = ''
+    version = ''
+    prev_hash ''
+    merkel_root = ''
+    time = ''
+    target = ''
+    nonce = ''
+    txcount = ''
 
-
-print 'target: ', hex(struct.unpack('I', blockstream.read(4))[0])
-print 'nonce: ', struct.unpack('I', blockstream.read(4))[0]
-
-print 'txcount: ', ord(blockstream.read(1))
-
-#print blockstream.read(32).encode("hex")
+    def __init__(self, blockstream):
+        self.magic_number = hex(parse_int(blockstream))
+        self.block_size = parse_int(blockstream)
+        self.version = parse_int(blockstream)
+        self.prev_hash = parse_hash(blockstream)
+        self.merkel_root = parse_hash(blockstream)
+        self.time = (
+            datetime.datetime.fromtimestamp(
+                parse_int(blockstream)
+                ).strftime('%Y-%m-%d %H:%M:%S'))
+        self.target = ''
+        self.nonce = ''
+        self.txcount = ''
