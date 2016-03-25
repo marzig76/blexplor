@@ -18,12 +18,15 @@ class block(object):
         self.txcount = compact_size(blockstream)
         self.txs = []
 
+        for i in range(0, self.txcount):
+            self.txs.append(tx(blockstream))
+
 
     def __str__(self):
-        return (
-            'Magic Number:\t' + hex(self.magic_number) +
+        blockstring = (
+            '\nMagic Number:\t' + hex(self.magic_number) +
             '\nBlock Size:\t' + str(self.block_size) +
-            '\nVersion:\t' + str(self.version) +
+            '\nBlock Version:\t' + str(self.version) +
             '\nPrevious Hash:\t' + self.prev_hash +
             '\nMerkel Root:\t' + self.merkel_root +
             '\nTime:\t' + (
@@ -34,3 +37,8 @@ class block(object):
             '\nNonce:\t' + str(self.nonce) +
             '\nTransaction Count:\t' + str(self.txcount)
         )
+
+        for i in self.txs:
+            blockstring += str(i)
+
+        return blockstring
