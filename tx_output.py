@@ -11,7 +11,7 @@ class tx_output(object):
 
     def __str__(self):
         return (
-            '\nValue Hash:\t' + str(self.value) +
+            '\nValue:\t' + str(self.value) +
             '\nPK Script Bytes:\t' + str(self.pk_script_bytes) +
             '\nPKScript:\t' + self.pk_script.encode('hex')
         )
