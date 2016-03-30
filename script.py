@@ -1,4 +1,5 @@
 import struct
+
 from opcode import opcode
 
 
@@ -46,14 +47,18 @@ class script(object):
                 # the next byte will contain the number of bytes of data
             elif byte == 0x4d:
                 # the next 2 bytes tells us how many bytes of data follows
-                data_len = parse_int(self.bytes[byte_count+1:byte_count+3], 2)
+                data_len = struct.unpack(
+                    '>H', self.bytes[byte_count+1:byte_count+3]
+                    )[0]
                 # set the skip counter to 2, plus however many bytes are coming
                 skip_count = (2 + data_len)
                 # set a flag to not display the next 2 bytes either.
                 print_skip = 2
             elif byte == 0x4e:
                 # the next four bytes tells us how many bytes of data follows
-                data_len = parse_int(self.bytes[byte_count+1:byte_count+5], 4)
+                data_len = struct.unpack(
+                    '>I', self.bytes[byte_count+1:byte_count+5]
+                    )[0]
                 # set the skip counter to 4, plus however many bytes are coming
                 skip_count = (4 + data_len)
                 # # set a flag to not display the next 4 bytes either.
