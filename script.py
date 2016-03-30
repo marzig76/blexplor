@@ -9,9 +9,9 @@ class script(object):
 
     def __init__(self, bytes):
         self.bytes = bytes
+        self.stack = self.interperet()
 
-    def __str__(self):
-
+    def interperet(self):
         # set up some counters
         byte_count = 0
         skip_count = 0
@@ -72,3 +72,6 @@ class script(object):
             byte_count += 1
 
         return stack
+
+    def __str__(self):
+        return self.stack
