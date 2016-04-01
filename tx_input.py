@@ -1,5 +1,5 @@
 """
-This module contains a class for parsing a bitcoin tx inputs.
+This module contains a class for parsing bitcoin tx inputs.
 
 Author: Mike Marzigliano
 """
