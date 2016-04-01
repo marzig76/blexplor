@@ -14,8 +14,6 @@ class tx(object):
 
     def __init__(self, blockstream):
         """
-        Initialize the class.
-
         Parse the values for all fields in each transaction.
 
         Arguemnts:
