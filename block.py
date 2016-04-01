@@ -1,12 +1,26 @@
+"""
+This module contains a class for parsing a bitcoin block.
+
+Author: Mike Marzigliano
+"""
+
 import datetime
 from tx import tx
 from blockutil import *
 
 
 class block(object):
-
+    """This class is for parsing the block header and block data fields."""
 
     def __init__(self, blockstream):
+        """
+        Initialize the class.
+
+        Parse the values for all fields in the the block header and block.
+
+        Arguemnts:
+        blockstream - the stream of data to parse
+        """
         self.magic_number = parse_int(blockstream, 4)
         self.block_size = parse_int(blockstream, 4)
         self.version = parse_int(blockstream, 4)
@@ -21,8 +35,8 @@ class block(object):
         for i in range(0, self.txcount):
             self.txs.append(tx(blockstream))
 
-
     def __str__(self):
+        """Build and return a string representing the block data."""
         blockstring = (
             '\nMagic Number:\t' + hex(self.magic_number) +
             '\nBlock Size:\t' + str(self.block_size) +
