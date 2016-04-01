@@ -1,6 +1,8 @@
+"""A simple module housing Bitcoin Script OP Code values."""
 
 
 class opcode(object):
+    """Define Bitcoin Script OP Code values."""
 
     opcodes = {}
 
