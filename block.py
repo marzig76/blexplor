@@ -14,8 +14,6 @@ class block(object):
 
     def __init__(self, blockstream):
         """
-        Initialize the class.
-
         Parse the values for all fields in the block header and block.
 
         Arguemnts:
