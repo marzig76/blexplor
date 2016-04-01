@@ -1,17 +1,38 @@
-import struct
+"""
+This module contains a class to interperet script OP Codes from a scriptpubkey.
 
+Author: Mike Marzigliano
+"""
+import struct
 from opcode import opcode
 
 
 class script(object):
+    """
+    This class is for interpereting bitcoin sript OP Codes.
+
+    Define the existing OP Codes by creating an instance of the op_code class.
+    """
 
     opcodes = opcode().opcodes
 
     def __init__(self, bytes):
+        """
+        Take the given bytes and call the interpereter.
+
+        Arguemnts:
+        bytes - the data to interperet
+        """
         self.bytes = bytes
         self.stack = self.interperet()
 
     def interperet(self):
+        """
+        Interperet data into OP Codes.
+
+        Loop through each byte.  Either read the appropriate number of bytes
+        as data, or simply translate the byte into its corresponding OP code.
+        """
         # set up some counters
         byte_count = 0
         skip_count = 0
@@ -74,4 +95,5 @@ class script(object):
         return stack
 
     def __str__(self):
+        """Return a string representing the scriptpubkey."""
         return self.stack
