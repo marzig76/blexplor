@@ -1,11 +1,26 @@
+"""
+This module contains a class for parsing a bitcoin transactions.
+
+Author: Mike Marzigliano
+"""
+
 from blockutil import *
 from tx_input import tx_input
 from tx_output import tx_output
 
-class tx(object):
 
+class tx(object):
+    """This class is for parsing bitcoin transactions."""
 
     def __init__(self, blockstream):
+        """
+        Initialize the class.
+
+        Parse the values for all fields in each transaction.
+
+        Arguemnts:
+        blockstream - the stream of data to parse
+        """
         self.version = parse_int(blockstream, 4)
         self.tx_input_count = compact_size(blockstream)
         self.tx_inputs = []
@@ -22,6 +37,7 @@ class tx(object):
         self.lock_time = parse_int(blockstream, 4)
 
     def __str__(self):
+        """Build and return a string representing transaction data."""
         txstring = (
             '\n-------------------------------------' +
             '\nTx Version:\t' + str(self.version) +
