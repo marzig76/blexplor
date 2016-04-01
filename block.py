@@ -16,7 +16,7 @@ class block(object):
         """
         Initialize the class.
 
-        Parse the values for all fields in the the block header and block.
+        Parse the values for all fields in the block header and block.
 
         Arguemnts:
         blockstream - the stream of data to parse
