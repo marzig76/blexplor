@@ -12,8 +12,6 @@ class tx_input(object):
 
     def __init__(self, blockstream):
         """
-        Initialize the class.
-
         Parse the values for all fields in each tx input.
 
         Arguemnts:
