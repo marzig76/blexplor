@@ -2,7 +2,7 @@ from block import block
 from script import script
 import sqlite3
 
-blockfile = '/home/marzig76/.bitcoin/blocks/blk00003.dat'
+blockfile = '/home/marzig76/.bitcoin/blocks/blk00004.dat'
 blockstream = open(blockfile, 'rb')
 b = block(blockstream)
 
@@ -18,7 +18,7 @@ insert_block = (
     "VALUES " +
     "(?,?,?,?,?,?,?,?,?,0)"
 )
-c.execute(insert_block, (b.magic_number, b.block_size, b.prev_hash, b.version,
+c.execute(insert_block, (b.magic_number, b.block_size, b.version, b.prev_hash,
                          b.merkel_root, b.time, b.target, b.nonce, b.txcount))
 conn.commit()
 
