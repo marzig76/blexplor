@@ -4,7 +4,12 @@ This module contains functions to parse bitcoin blocks.
 Author: Mike Marzigliano
 """
 
+import sys
+import ecdsa
+import base58
 import struct
+import random
+import hashlib
 
 
 def parse_int(blockstream, bytes):
@@ -65,3 +70,33 @@ def compact_size(blockstream):
         return False
 
     return parse_int(blockstream, bytes)
+
+
+def pkhash2addr(pkhash):
+    """
+    Convert a public key has to a bitcoin address.
+
+    Send a hex encoded public key hash and get a bitcoin address returned.
+
+    Aguments:
+    pkhash - hex encoded public key hash
+    """
+    build_key = '\00' + pkhash.decode('hex')
+    d256_checksum = hashlib.sha256(
+        hashlib.sha256(build_key).digest()).digest()[:4]
+    addr = base58.b58encode(build_key + d256_checksum)
+    return addr
+
+
+def pubkey2addr(pubkey):
+    """
+    Convert a public key to a bitcoin address.
+
+    Send a public key and get a bitcoin address returned.
+
+    Arguments:
+    pubkey - a bitcoin public key
+    """
+    ripemd160 = hashlib.new('ripemd160')
+    ripemd160.update(hashlib.sha256(pubkey).digest())
+    return pkhash2addr(ripemd160.digest().encode('hex'))
