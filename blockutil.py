@@ -74,7 +74,7 @@ def compact_size(blockstream):
 
 def pkhash2addr(pkhash):
     """
-    Convert a public key has to a bitcoin address.
+    Convert a public key hash to a bitcoin address.
 
     Send a hex encoded public key hash and get a bitcoin address returned.
 
