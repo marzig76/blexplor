@@ -46,11 +46,7 @@ class script(object):
             # Either find a corresponding opcode
             # or read the number of appropriate bytes of data.
             # If just reading bytes, skip checking them as opcodes
-            if byte == 0x6a:
-                # 0x6a (OP_RETURN) the rest of the script is just data.
-                # skip it all
-                skip_count = len(self.bytes)
-            elif skip_count > 0:
+            if skip_count > 0:
                 if print_skip == 0:
                     stack += i.encode('hex')
                 else:
@@ -89,6 +85,11 @@ class script(object):
                 for key in self.opcodes:
                     if self.opcodes[key] == byte:
                         stack += key + ' '
+
+                        # 0x6a (OP_RETURN) the rest of the script is just data.
+                        if byte == 0x6a:
+                            # skip it all
+                            skip_count = len(self.bytes)
 
             byte_count += 1
 
