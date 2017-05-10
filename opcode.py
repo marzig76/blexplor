@@ -114,6 +114,7 @@ class opcode(object):
 
     # Locktime
     opcodes['OP_CHECKLOCKTIMEVERIFY'] = 0xb1
+    opcodes['OP_CHECKSEQUENCEVERIFY'] = 0xb2
 
     # Pseudo-words
     opcodes['OP_PUBKEYHASH'] = 0xfd
@@ -128,7 +129,6 @@ class opcode(object):
     opcodes['OP_RESERVED1'] = 0x89
     opcodes['OP_RESERVED2'] = 0x8a
     opcodes['OP_NOP1'] = 0xb0
-    opcodes['OP_NOP3'] = 0xb2
     opcodes['OP_NOP4'] = 0xb3
     opcodes['OP_NOP5'] = 0xb4
     opcodes['OP_NOP6'] = 0xb5
